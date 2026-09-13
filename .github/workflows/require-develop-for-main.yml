@@ -1,0 +1,21 @@
+name: Require develop for main
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  require-develop:
+    name: require-develop
+    runs-on: ubuntu-latest
+    steps:
+      - name: Allow only PRs from develop
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+        run: |
+          if [ "$HEAD_REF" != "develop" ]; then
+            echo "::error::Los pull requests hacia main solo pueden venir de develop (rama origen: $HEAD_REF)."
+            exit 1
+          fi
+          echo "OK: el PR viene de develop."
