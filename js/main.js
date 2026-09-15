@@ -13,16 +13,26 @@ function saludoPorHora() {
 boton.addEventListener("click", (evento) => {
   evento.preventDefault();
 
-  const nombre = window.prompt("¿Como te llamas?");
+  const caja = boton.getBoundingClientRect();
+  const origenX = evento.clientX || caja.left + caja.width / 2;
+  const origenY = evento.clientY || caja.top + caja.height / 2;
 
-  if (!nombre || !nombre.trim()) {
-    return;
+  if (typeof window.explosionParticulas === "function") {
+    window.explosionParticulas(origenX, origenY);
   }
 
-  const nombreLimpio = nombre.trim();
+  window.setTimeout(() => {
+    const nombre = window.prompt("¿Como te llamas?");
 
-  titulo.textContent = `${saludoPorHora()}, ${nombreLimpio}`;
-  mensaje.textContent =
-    "Que gusto tenerte aqui. Tu pagina de bienvenida ya esta lista para personalizar.";
-  boton.textContent = "Saludar de nuevo";
+    if (!nombre || !nombre.trim()) {
+      return;
+    }
+
+    const nombreLimpio = nombre.trim();
+
+    titulo.textContent = `${saludoPorHora()}, ${nombreLimpio}`;
+    mensaje.textContent =
+      "Que gusto tenerte aqui. Tu pagina de bienvenida ya esta lista para personalizar.";
+    boton.textContent = "Saludar de nuevo";
+  }, 750);
 });

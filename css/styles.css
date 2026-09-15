@@ -19,13 +19,21 @@ body {
   overflow: hidden;
 }
 
-#particulas {
+#particulas,
+#explosion {
   position: fixed;
   inset: 0;
   width: 100%;
   height: 100%;
-  z-index: 0;
   pointer-events: none;
+}
+
+#particulas {
+  z-index: 0;
+}
+
+#explosion {
+  z-index: 2;
 }
 
 main {
